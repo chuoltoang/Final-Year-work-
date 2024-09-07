@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="assets/css/payment.css">
+</head>
+<body>
+    <h2>Payment</h2>
+    <p id="order-id"></p>
+    <p id="total-amount"></p>
+
+    <!-- Payment form -->
+    <form action="process_payment.php" method="post">
+        <input type="hidden" name="order_id" id="order_id">
+        <input type="hidden" name="total_amount" id="total_amount">
+        <label for="payment_method">Payment Method:</label>
+        <select name="payment_method" id="payment_method">
+            <option value="cod">Cash on Delivery</option>
+            
+        </select>
+        <button type="submit">Complete Payment</button>
+    </form>
+
+    <script>
+        // Get the order ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderID = urlParams.get('order_id');
+
+        // Fetch order details using order ID
+        fetch(`fetch_order_details.php?order_id=${orderID}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('order-id').textContent = 'Order ID: ' + data.orderID;
+                document.getElementById('total-amount').textContent = 'Total Amount: $' + parseFloat(data.totalAmount).toFixed(2);
+                document.getElementById('order_id').value = data.orderID;
+                document.getElementById('total_amount').value = parseFloat(data.totalAmount).toFixed(2);
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

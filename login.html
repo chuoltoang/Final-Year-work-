@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="assets/css/login.css">
+    <script src="assets/js/login.js" defer></script> <!-- Ensure JavaScript runs after the DOM loads -->
+</head>
+<body>
+    <div class="login-container">
+        <form id="login-form" action="login.php" method="post">
+            <h2>LOGIN</h2>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <div class="error" id="email-error"></div>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <div class="error" id="password-error"></div>
+            
+            <input type="submit" value="Login">
+            
+            <p class="register-link">Don't have an account? <a href="customerregistration.html">Register here</a></p>
+            <p class="forgot-password-link"><a href="forgot_password.php">Forgot your password?</a></p>
+
+            <!-- Error message container for server-side errors -->
+            <div id="login-error" class="error"></div>
+        </form>
+    </div>
+</body>
+</html>
